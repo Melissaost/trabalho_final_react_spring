@@ -6,6 +6,7 @@ import Detalhes from "./pages/detalhes";
 import Cadastro from "./pages/cadastro";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import LoginPage from "./pages/loginPage";
 
 function Routers() {
   return (
@@ -14,6 +15,7 @@ function Routers() {
         <Layout>
           <Routes>
             <Route path="/" Component={Initial} />
+            <Route path="/login" Component={LoginPage} />
             <Route path="/cadastro" Component={Cadastro} />
             <Route path="/detalhes/:id?" Component={Detalhes} />
           </Routes>

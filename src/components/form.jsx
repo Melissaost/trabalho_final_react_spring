@@ -77,13 +77,15 @@ function Form({ isEdit }) {
               Cavalos De Potencia
             </label>
             <input
-              type="cavalosDePotencia"
-              id="pais"
+              type="number"
+              id="cavalosDePotencia"
               onChange={(e) => changeField("cavalosDePotencia", e.target.value)}
               placeholder="Digite a quantidade de cavalos de potencia"
               value={carro?.cavalosDePotencia || ""}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-gray-500 dark:focus:border-gray-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-gray-500 dark:focus:border-gray-500"
               required
+              inputMode="numeric"
+              min="0"
             />
           </div>
         </div>
@@ -97,13 +99,15 @@ function Form({ isEdit }) {
               Ano
             </label>
             <input
-              type="ano"
+              type="number"
               id="ano"
               onChange={(e) => changeField("ano", e.target.value)}
               placeholder="Digite o ano"
               value={carro?.ano || ""}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-500 focus:border-gray-500 block w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-gray-500 dark:focus:border-gray-500"
               required
+              inputMode="numeric"
+              min="0"
             />
           </div>
           <div>

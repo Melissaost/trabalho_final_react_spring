@@ -5,14 +5,16 @@ import Container from "./container";
 /* eslint-disable react/prop-types */
 function Layout({ children }) {
   return (
-    <>
-      <Container>
+    <div className="flex flex-col min-h-screen">
+      <header>
         <Header />
-        <main>{children}</main>
+      </header>
+      <main className="flex-1">{children}</main>
+      <footer>
         <Footer />
-      </Container>
-    </>
+      </footer>
+    </div>
   );
-}
+};
 
 export default Layout;

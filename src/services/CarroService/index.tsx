@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Carro } from '../../models/carro';
 
 
-class UsuarioService {
+class CarroService {
   apiUrl = "http://localhost:8080";
   serverPath = "/api/carros";
 
@@ -57,4 +57,4 @@ class UsuarioService {
     })
   }
 }
-export default UsuarioService;
+export default CarroService;

@@ -1,13 +1,13 @@
-import UsuarioService from "../../../services/CarroService";
+import CarroService from "../../../services/CarroService";
 import { setCarros, setDetalhes, setLoading, setTotal } from "./reducer";
 import Swal from "sweetalert2";
 
-const usuarioService = new UsuarioService();
+const carroService = new CarroService();
 
 export const getAllPaginated = (page, limit) => async (dispatch) => {
   dispatch(setLoading(true));
   try {
-    const response = await usuarioService.getAllPaginated(page, limit);
+    const response = await carroService.getAllPaginated(page, limit);
     dispatch(setCarros(response.content));
     dispatch(setTotal(response.totalElements));
   } catch (error) {
@@ -19,7 +19,7 @@ export const getAllPaginated = (page, limit) => async (dispatch) => {
 
 export const getDetalhesCarro = (id) => async (dispatch) => {
   try {
-    const result = await usuarioService.getById(id);
+    const result = await carroService.getById(id);
     dispatch(setDetalhes(result.data));
   } catch (error) {
     console.log("error", error);
@@ -45,9 +45,9 @@ export const saveForm =
 
       if (editForm) {
         const id = carro.id;
-        await usuarioService.update(id, carro);
+        await carroService.update(id, carro);
       } else {
-        await usuarioService.save(carro);
+        await carroService.save(carro);
       }
       
       dispatch(getAllPaginated());
@@ -86,7 +86,7 @@ export const saveForm =
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await usuarioService.delete(carro.id);
+          await carroService.delete(carro.id);
   
           Swal.fire({
             title: "Sucesso!",
