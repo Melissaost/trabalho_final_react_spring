@@ -11,7 +11,7 @@ class UsuarioService {
     try {
       const url = `${this.apiUrl}${this.serverPath}`;
       const response = await axios.post(url, carro);
-      return response.content;
+      return response;
     } catch (error) {
       console.error("Erro ao salvar o carro", error);
       throw error;
@@ -27,7 +27,6 @@ class UsuarioService {
       },
     })
     .then((response) => {
-      console.log(response.data);
       return response.data;
     })
     .catch((error) => {
