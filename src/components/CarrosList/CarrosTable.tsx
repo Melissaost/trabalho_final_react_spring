@@ -37,7 +37,7 @@ const CarrosTable: React.FC = () => {
   const [limit, setLimit] = useState<number>(10);
 
   const handlePageChange = (event: unknown, newPage: number) => {
-    dispatch(getAllPaginated(newPage, limit)); // Usando a ação do Redux
+    dispatch(getAllPaginated(newPage, limit)); 
     setPage(newPage);
   };
 
@@ -45,19 +45,17 @@ const CarrosTable: React.FC = () => {
     const newLimit = parseInt(event.target.value, 10);
     setPage(0);
     setLimit(newLimit);
-    dispatch(getAllPaginated(0, newLimit)); // Usando a ação do Redux
+    dispatch(getAllPaginated(0, newLimit));
   };
 
   const handleDelete = (carro) => {
-    dispatch(deleteCarro(carro)); // Usando a ação do Redux para deletar
+    dispatch(deleteCarro(carro)); 
   };
 
-  // Chama a ação ao carregar o componente para buscar os dados
   useEffect(() => {
-    dispatch(getAllPaginated(0, limit)); // Usando a ação do Redux para buscar os dados
+    dispatch(getAllPaginated(0, limit)); 
   }, [dispatch, limit]);
 
-  console.log(carros); // Verifique os dados que vêm da store
 
   return (
     <Card>

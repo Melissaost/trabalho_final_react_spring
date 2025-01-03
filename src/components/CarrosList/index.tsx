@@ -10,6 +10,7 @@ function CarrosList() {
         justifyContent="center"
         alignItems="stretch"
         spacing={3}
+        padding={5}
       >
         <Grid item xs={12}>
           <CarrosTable />
