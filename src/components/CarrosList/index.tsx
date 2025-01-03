@@ -1,7 +1,7 @@
 import { Grid, Container } from '@mui/material';
-import UsersTable from './UsersTable';
+import CarrosTable from './CarrosTable';
 
-function UsersList() {
+function CarrosList() {
   return (
     <Container maxWidth="lg">
       <Grid
@@ -12,11 +12,11 @@ function UsersList() {
         spacing={3}
       >
         <Grid item xs={12}>
-          <UsersTable />
+          <CarrosTable />
         </Grid>
       </Grid>
     </Container>
   );
 }
 
-export default UsersList;
+export default CarrosList;

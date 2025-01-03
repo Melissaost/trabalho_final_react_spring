@@ -1,4 +1,4 @@
-import UsuarioService from "../../../services/PersonagemService";
+import UsuarioService from "../../../services/CarroService";
 import { setCarros, setDetalhes, setLoading, setTotal } from "./reducer";
 import Swal from "sweetalert2";
 

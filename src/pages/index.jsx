@@ -1,7 +1,7 @@
-import UsersList from "../components/UsersList";
+import CarrosList from "../components/CarrosList";
 function Initial() {
 
-  return <UsersList />;
+  return <CarrosList />;
 }
 
 export default Initial;

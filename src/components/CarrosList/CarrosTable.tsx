@@ -23,7 +23,7 @@ import { deleteCarro, getAllPaginated } from '../../store/slices/carro/actions';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const UsersTable: React.FC = () => {
+const CarrosTable: React.FC = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -150,4 +150,4 @@ const UsersTable: React.FC = () => {
   );
 };
 
-export default UsersTable;
+export default CarrosTable;

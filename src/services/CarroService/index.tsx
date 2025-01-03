@@ -43,11 +43,6 @@ class UsuarioService {
     return axios.put(url, carro);
   }
 
-  // update(id: number, carro){
-  //   console.log("update", id, carro);
-  //   return axios.put(`${this.apiUrl}${this.serverPath}/${id}`, carro);
-  // }
-
   search(formData: { origin: string; nome: string; status: string }) {
     return axios.get<Carro[]>("http://localhost:8080/api/characters/search",{
       headers:{
