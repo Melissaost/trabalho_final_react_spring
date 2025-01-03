@@ -1,0 +1,89 @@
+:root,
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  width: 1024px;
+  margin: 0 auto;
+}
+
+header {
+  background-color: rgb(0, 0, 0, 0.8);
+  color: white;
+  padding: 16px;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  background-color: #f4f4f4;
+  margin-top: 8px;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  padding: 8px 16px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+main {
+  padding: 16px;
+}
+
+.btn-cadastrar {
+  display: inline-block;
+  margin-bottom: 16px;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+table th {
+  background-color: rgb(0, 0, 0, 0.8);
+  color: white;
+}
+
+table td a {
+  text-decoration: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.btn-editar {
+  background-color: #8e8e8e;
+}
+
+.btn-excluir {
+  background-color: #dc3545;
+}
+
+footer {
+  text-align: center;
+  padding: 16px;
+  background-color: #f4f4f4;
+  color: #333;
+}
