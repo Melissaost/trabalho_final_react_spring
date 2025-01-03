@@ -11,7 +11,7 @@ class UsuarioService {
     try {
       const url = `${this.apiUrl}${this.serverPath}`;
       const response = await axios.post(url, carro);
-      return response.data;
+      return response.content;
     } catch (error) {
       console.error("Erro ao salvar o carro", error);
       throw error;
@@ -20,14 +20,19 @@ class UsuarioService {
 
 
   getAllPaginated(page: number, limit: number) {
-    let carros = axios.get("http://localhost:8080" + this.serverPath, {
+    return axios.get("http://localhost:8080" + this.serverPath, {
       headers: {
         page: page,
         size: limit,
       },
+    })
+    .then((response) => {
+      console.log(response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      console.error("Erro ao carregar os dados", error);
     });
-    
-    return carros
   }
 
   delete(id){

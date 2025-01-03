@@ -8,8 +8,8 @@ export const getAllPaginated = (page, limit) => async (dispatch) => {
   dispatch(setLoading(true));
   try {
     const response = await usuarioService.getAllPaginated(page, limit);
-    dispatch(setCarros(response.data));
-    dispatch(setTotal(parseInt(response.headers['X-Total-Count'], 10)));
+    dispatch(setCarros(response.content));
+    dispatch(setTotal(response.totalElements));
   } catch (error) {
     console.log('Erro', error);
   } finally {
