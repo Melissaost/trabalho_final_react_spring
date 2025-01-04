@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/Auth/AuthContext";
 import BotaoNavegacao from "../BotaoNavegacao";
@@ -17,11 +17,24 @@ function BarraNavegacao() {
         navigate('/login');
     };
 
+      // Estado para controlar a visibilidade do menu em telas pequenas
+    const [isOpen, setIsOpen] = useState(false);
+    
+      // Função para alternar o menu
+    const toggleMenu = () => {
+        setIsOpen(prevState => !prevState);
+    };
+
     return (
         <nav className="ab-navbar">
             <h1 className="logo">
                 <Link to="/">
-                    <img className="logo" src={logo} alt="Logo da AluraBooks" />
+                <span
+                    className="self-center text-2xl font-semibold whitespace-nowrap dark:text-black"
+                    style={{ fontFamily: "Roboto, sans-serif" }}
+                >
+                    Infnet - Carros
+                </span>
                 </Link>
             </h1>
             <div className="navegacao"></div>

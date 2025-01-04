@@ -69,3 +69,29 @@
     background: #fff;
     color: #000;
 }
+
+/* Media query para telas menores, ajustando o tamanho da fonte */
+@media (max-width: 768px) {
+    .acoes{
+        font-size: 14px !important;  /* Reduz o tamanho da fonte para telas menores */
+    }
+
+    h1 span {
+        font-size: 16px !important;
+    }
+}
+
+/* Caso queira reduzir ainda mais para telas muito pequenas */
+@media (max-width: 535px) {
+    .acoes {
+        font-size: 12px;  /* Tamanho ainda menor para dispositivos com tela muito pequena */
+    }
+
+    h1 span {
+        font-size: 14px !important;
+    }
+
+    .ab-navbar {
+        height: 120px;
+    }
+}
