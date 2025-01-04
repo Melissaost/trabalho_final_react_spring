@@ -1,10 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./Login.css";
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import UsuarioService from "../../services/UsuarioService";
 
-const Login = () => {
+const Login = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -22,8 +21,10 @@ const Login = () => {
         const resposta = await usuarioService.authenticateUser(usuario);
     
         if (resposta) {
+            console.log(resposta)
             setEmail('');
             setPassword('');
+            onLoginSuccess(); 
             navigate('/');
         }
     };
