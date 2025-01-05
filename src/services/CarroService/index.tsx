@@ -1,16 +1,18 @@
 import axiosInstance from '../Auth/axiosInstance';
 import { Carro } from '../../models/carro';
 
-
 class CarroService {
-  apiUrl = "http://localhost:8080";
-  serverPath = "/api/carros";
+  private apiUrl = "http://localhost:8080";
+  private serverPath = "/api/carros";
+  private headers = {
+    'Content-Type': 'application/json',
+  };
 
-
-  save = async (carro) => {
+  // Método para salvar o carro
+  save = async (carro: Carro) => {
     try {
       const url = `${this.apiUrl}${this.serverPath}`;
-      const response = await axiosInstance.post(url, carro);
+      const response = await axiosInstance.post(url, carro, { headers: this.headers });
       return response;
     } catch (error) {
       console.error("Erro ao salvar o carro", error);
@@ -18,70 +20,74 @@ class CarroService {
     }
   }
 
-
-  getAllPaginated(page: number, limit: number) {
-    return axiosInstance.get("http://localhost:8080" + this.serverPath, {
+  // Método para obter carros paginados
+  getAllPaginated = (page: number, limit: number) => {
+    return axiosInstance.get(`${this.apiUrl}${this.serverPath}`, {
       headers: {
+        ...this.headers,
         page: page,
         size: limit,
       },
     })
-    .then((response) => {
-      return response.data;
-    })
+    .then((response) => response.data)
     .catch((error) => {
       console.error("Erro ao carregar os dados", error);
     });
   }
 
-  getAll(limit: number) {
-    return axiosInstance.get("http://localhost:8080" + this.serverPath, {
+  // Método para obter todos os carros sem paginação
+  getAll = (limit: number) => {
+    return axiosInstance.get(`${this.apiUrl}${this.serverPath}`, {
       headers: {
+        ...this.headers,
         page: 0,
         size: limit,
       },
     })
-    .then((response) => {
-      return response.data.content;      ;
-    })
+    .then((response) => response.data.content)
     .catch((error) => {
       console.error("Erro ao carregar os dados", error);
     });
   }
 
-  delete(id){
-    return axiosInstance.delete("http://localhost:8080" + this.serverPath + "/" + id)
+  // Método para deletar um carro
+  delete = (id: number) => {
+    return axiosInstance.delete(`${this.apiUrl}${this.serverPath}/${id}`, { headers: this.headers });
   }
 
-  getById(id:number){
-    return axiosInstance.get<Carro>(`http://localhost:8080${this.serverPath}/${id}`)
+  // Método para obter um carro pelo ID
+  getById = (id: number) => {
+    return axiosInstance.get<Carro>(`${this.apiUrl}${this.serverPath}/${id}`, { headers: this.headers });
   }
 
-  update = (id: number, carro) => {
+  // Método para atualizar um carro
+  update = (id: number, carro: Carro) => {
     const url = `${this.apiUrl}${this.serverPath}/${id}`;
-    return axiosInstance.put(url, carro);
+    return axiosInstance.put(url, carro, { headers: this.headers });
   }
 
-  search(filters: { modelo?: string; fabricante?: string; pais?: string }) {
-    return axiosInstance
-        .get('http://localhost:8080/api/carros/search', {
-            headers: {
-                modelo: filters.modelo || '',
-                fabricante: filters.fabricante || '',
-                pais: filters.pais || '',
-            },
-        }).then((response) => {
-          return response;
-        })
-        .catch((error) => {
-            console.error('Erro ao buscar carros:', error);
-            throw error;
-        });
+  // Método para buscar carros com filtros
+  search = (filters: { modelo?: string; fabricante?: string; pais?: string }) => {
+    return axiosInstance.get(`${this.apiUrl}/api/carros/search`, {
+      headers: {
+        ...this.headers,
+        modelo: filters.modelo || '',
+        fabricante: filters.fabricante || '',
+        pais: filters.pais || '',
+      },
+    })
+    .then((response) => response)
+    .catch((error) => {
+      console.error('Erro ao buscar carros:', error);
+      throw error;
+    });
   }
 
-  exportCars() {
-    return axiosInstance.get("http://localhost:8080/api/carros/export-cars", {
-      responseType: 'blob', 
+  // Método para exportar carros em formato CSV
+  exportCars = () => {
+    return axiosInstance.get(`${this.apiUrl}${this.serverPath}/export-cars`, {
+      responseType: 'blob',
+      headers: this.headers,
     })
     .then((response) => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -98,4 +104,5 @@ class CarroService {
     });
   }
 }
+
 export default CarroService;
