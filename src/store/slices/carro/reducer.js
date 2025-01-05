@@ -4,7 +4,8 @@ const initialState = {
   carros: [],
   detalhe: {},
   loading: false,
-  total: 0 
+  total: 0,
+  filters: {},
 };
 
 export const counterSlice = createSlice({
@@ -23,9 +24,12 @@ export const counterSlice = createSlice({
     setDetalhes: (state, action) => {
       state.detalhe = action.payload;
     },
+    setFilters: (state, action) => {
+      state.filters = action.payload;
+    },
   },
 });
 
-export const { setCarros, setDetalhes, setLoading, setTotal } = counterSlice.actions;
+export const { setCarros, setDetalhes, setLoading, setTotal, setFilters } = counterSlice.actions;
 
 export default counterSlice.reducer;

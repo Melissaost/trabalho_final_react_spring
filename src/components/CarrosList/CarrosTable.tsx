@@ -11,7 +11,7 @@ import ExportButton from './ExportButton';
 const CarrosTable: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { carros, loading, total } = useSelector((state: any) => state.carros || { carros: [], loading: false, total: 0 });
+  const { carros, loading, total, filters } = useSelector((state: any) => state.carros || { carros: [], loading: false, total: 0, filters: {} });
   const [page, setPage] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
 
@@ -19,6 +19,12 @@ const CarrosTable: React.FC = () => {
     dispatch(getAllPaginated(newPage, limit));
     setPage(newPage);
   };
+
+  useEffect(() => {
+    if (filters && Object.keys(filters).length > 0) {
+      setPage(0);
+    }
+  }, [filters]);
 
   const handleLimitChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newLimit = parseInt(event.target.value, 10);
@@ -32,6 +38,8 @@ const CarrosTable: React.FC = () => {
       dispatch(getAllPaginated(0, limit));
     }
   }, [dispatch, limit]);
+
+  const rowsPerPageOptions = filters && Object.keys(filters).length > 0 ? [15] : [5, 10, 15, 25, 50, total];
 
   return (
     <Card>
@@ -69,6 +77,7 @@ const CarrosTable: React.FC = () => {
           limit={limit}
           handlePageChange={handlePageChange}
           handleLimitChange={handleLimitChange}
+          rowsPerPageOptions={rowsPerPageOptions}
         />
       </Box>
     </Card>

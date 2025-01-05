@@ -7,9 +7,10 @@ interface TablePaginationComponentProps {
     limit: number;
     handlePageChange: (event: unknown, newPage: number) => void;
     handleLimitChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    rowsPerPageOptions: number[];
 }
 
-const TablePaginationComponent: React.FC<TablePaginationComponentProps> = ({ count, page, limit, handlePageChange, handleLimitChange }) => {
+const TablePaginationComponent: React.FC<TablePaginationComponentProps> = ({ count, page, limit, handlePageChange, handleLimitChange, rowsPerPageOptions }) => {
     return (
         <TablePagination
             component="div"
@@ -18,7 +19,8 @@ const TablePaginationComponent: React.FC<TablePaginationComponentProps> = ({ cou
             rowsPerPage={limit}
             onRowsPerPageChange={handleLimitChange}
             onPageChange={handlePageChange}
-            rowsPerPageOptions={[5, 10, 25, 50, 70]}
+            rowsPerPageOptions={rowsPerPageOptions}
+            disabled={rowsPerPageOptions.length === 1}
         />
     );
 };

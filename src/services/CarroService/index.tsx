@@ -62,14 +62,21 @@ class CarroService {
     return axiosInstance.put(url, carro);
   }
 
-  search(formData: { origin: string; nome: string; status: string }) {
-    return axiosInstance.get<Carro[]>("http://localhost:8080/api/characters/search",{
-      headers:{
-        nome: formData.nome,
-        land: formData.origin,
-        status: formData.status
-      }
-    })
+  search(filters: { modelo?: string; fabricante?: string; pais?: string }) {
+    return axiosInstance
+        .get('http://localhost:8080/api/carros/search', {
+            headers: {
+                modelo: filters.modelo || '',
+                fabricante: filters.fabricante || '',
+                pais: filters.pais || '',
+            },
+        }).then((response) => {
+          return response;
+        })
+        .catch((error) => {
+            console.error('Erro ao buscar carros:', error);
+            throw error;
+        });
   }
 }
 export default CarroService;

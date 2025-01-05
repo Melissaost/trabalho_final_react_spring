@@ -1,5 +1,5 @@
 import CarroService from "../../../services/CarroService";
-import { setCarros, setDetalhes, setLoading, setTotal } from "./reducer";
+import { setCarros, setDetalhes, setFilters, setLoading, setTotal } from "./reducer";
 import Swal from "sweetalert2";
 
 const carroService = new CarroService();
@@ -16,6 +16,22 @@ export const getAllPaginated = (page, limit) => async (dispatch) => {
     dispatch(setLoading(false));
   }
 };
+
+export const handleSearch =
+  (filters) =>
+  async (dispatch) => {
+    dispatch(setLoading(true));
+    try {
+      dispatch(setFilters(filters));
+      const response = await carroService.search(filters);
+      dispatch(setCarros(response.data));
+      dispatch(setTotal(response.data.length));
+    } catch (error) {
+      console.error("Erro ao buscar carros:", error);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
 
 export const getDetalhesCarro = (id) => async (dispatch) => {
   try {
