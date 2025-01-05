@@ -12,7 +12,7 @@ function Form({ isEdit }) {
   const submitForm = () => dispatch(saveForm(isEdit)).then(() => navigate("/"));
 
   return (
-    <div className="cadastro p-[5%] h-[82vh]">
+    <div className="cadastro p-[5%] h-[82vh] mb-5">
       <div>
         <div className="grid gap-6 mb-6 md:grid-cols-2">
           <div>
@@ -130,7 +130,7 @@ function Form({ isEdit }) {
         </div>
 
         {/* Botões */}
-        <div className="flex justify-center w-full gap-10">
+        <div className="flex justify-center w-full gap-10 mb-100">
           <button
             type="button"
             onClick={submitForm}
