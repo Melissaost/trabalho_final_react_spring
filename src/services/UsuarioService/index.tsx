@@ -9,7 +9,6 @@ class UsuarioService {
     authenticateUser = async (loginData: LoginData) => {
         try {
             const response = await axios.post(this.apiUrl + this.serverPath, loginData);
-            console.log(response);
             sessionStorage.setItem('token', response.data.token);
             return response;  
         } catch (erro) {

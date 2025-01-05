@@ -14,8 +14,6 @@ function Detalhes() {
     dispatch(getDetalhesCarro(id));
   }, [dispatch, id]);
 
-  console.log(carro.id)
-
   if (!carro.id) {
     return <ErrorCarro />;
   } else {

@@ -21,7 +21,6 @@ const Login = ({ onLoginSuccess }: { onLoginSuccess: () => void }) => {
         const resposta = await usuarioService.authenticateUser(usuario);
     
         if (resposta) {
-            console.log(resposta)
             setEmail('');
             setPassword('');
             onLoginSuccess(); 
