@@ -78,5 +78,24 @@ class CarroService {
             throw error;
         });
   }
+
+  exportCars() {
+    return axiosInstance.get("http://localhost:8080/api/carros/export-cars", {
+      responseType: 'blob', 
+    })
+    .then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'carros.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    })
+    .catch((error) => {
+      console.error("Erro ao exportar carros", error);
+      throw error;
+    });
+  }
 }
 export default CarroService;
