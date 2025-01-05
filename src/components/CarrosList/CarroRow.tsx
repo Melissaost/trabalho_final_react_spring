@@ -4,6 +4,8 @@ import { Carro } from '../../models/carro';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useTheme } from '@mui/material/styles';
+import { deleteCarro } from '../../store/slices/carro/actions';
+import { useDispatch } from 'react-redux';
 
 interface CarroRowProps {
     carro: Carro;
@@ -11,6 +13,11 @@ interface CarroRowProps {
 }
 
 const CarroRow: React.FC<CarroRowProps> = ({ carro, navigate }) => {
+    const dispatch = useDispatch();
+
+    const handleDelete = (carro) => {
+        dispatch(deleteCarro(carro)); 
+    }
     const theme = useTheme();
 
     return (
@@ -51,7 +58,7 @@ const CarroRow: React.FC<CarroRowProps> = ({ carro, navigate }) => {
 
                 <Tooltip title="Deletar Carro" arrow>
                     <IconButton
-                        // onClick={() => handleDelete(carro)} 
+                        onClick={() => handleDelete(carro)} 
                         sx={{
                             '&:hover': { backgroundColor: theme.palette.error.light },
                             color: theme.palette.error.main
