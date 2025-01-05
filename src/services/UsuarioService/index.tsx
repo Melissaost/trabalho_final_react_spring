@@ -6,11 +6,6 @@ class UsuarioService {
     apiUrl = "http://localhost:8080";
     serverPath = "/api/usuarios/login";
 
-    // loginUsuario = async (email: string, password: string) => {
-    //     const response = await axios.post(this.apiUrl+this.serverPath, { email, password });
-    //     return response.data;
-    // };
-
     authenticateUser = async (loginData: LoginData) => {
         try {
             const response = await axios.post(this.apiUrl + this.serverPath, loginData);

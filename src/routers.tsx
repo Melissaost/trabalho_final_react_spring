@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import LoginPage from "./pages/loginPage";
 import PrivateRoute from "./services/Auth/PrivateRoute"; 
+import React from 'react';
 
 function Routers() {
   return (
@@ -14,8 +15,7 @@ function Routers() {
       <BrowserRouter>
         <Layout>
           <Routes>
-            <Route path="/login" Component={LoginPage} />
-            {/* As rotas protegidas precisam ser envolvidas com PrivateRoute */}
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<PrivateRoute><Initial /></PrivateRoute>} />
             <Route path="/cadastro" element={<PrivateRoute><Cadastro /></PrivateRoute>} />
             <Route path="/detalhes/:id?" element={<PrivateRoute><Detalhes /></PrivateRoute>} />

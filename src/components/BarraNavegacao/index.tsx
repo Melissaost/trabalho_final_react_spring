@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../services/Auth/AuthContext";
 import BotaoNavegacao from "../BotaoNavegacao";
-import logo from './assets/logo.png';
 import usuario from './assets/usuario.svg';
 import cadastrar from './assets/cadastrar.svg';
 import './BarraNavegacao.css';
@@ -15,14 +14,6 @@ function BarraNavegacao() {
         sessionStorage.removeItem('token');
         setIsUserLoggedIn(false);
         navigate('/login');
-    };
-
-      // Estado para controlar a visibilidade do menu em telas pequenas
-    const [isOpen, setIsOpen] = useState(false);
-    
-      // Função para alternar o menu
-    const toggleMenu = () => {
-        setIsOpen(prevState => !prevState);
     };
 
     return (

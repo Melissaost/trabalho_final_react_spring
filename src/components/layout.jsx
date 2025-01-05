@@ -1,6 +1,4 @@
-import Header from "./header";
 import Footer from "./footer";
-import Container from "./container";
 import BarraNavegacao from "./BarraNavegacao";
 
 /* eslint-disable react/prop-types */
