@@ -1,20 +1,4 @@
-import {
-  Box,
-  Card,
-  CardHeader,
-  Divider,
-  IconButton,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TablePagination,
-  TableRow,
-  Tooltip,
-  Typography,
-  useTheme
-} from '@mui/material';
+import { Box, Card, CardHeader, Divider, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Tooltip, Typography, useTheme } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Carro } from '../../models/carro';
@@ -22,11 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCarro, getAllPaginated } from '../../store/slices/carro/actions';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ImportExportIcon from '@mui/icons-material/ImportExport';
+import CarroService from '../../services/CarroService';
 
 const CarrosTable: React.FC = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const dispatch = useDispatch();
+  const carroService = new CarroService();
 
   // Pegando os dados da store
   const { carros, loading, total } = useSelector((state: any) => {
@@ -37,7 +24,7 @@ const CarrosTable: React.FC = () => {
   const [limit, setLimit] = useState<number>(10);
 
   const handlePageChange = (event: unknown, newPage: number) => {
-    dispatch(getAllPaginated(newPage, limit)); 
+    dispatch(getAllPaginated(newPage, limit));
     setPage(newPage);
   };
 
@@ -48,18 +35,69 @@ const CarrosTable: React.FC = () => {
     dispatch(getAllPaginated(0, newLimit));
   };
 
-  const handleDelete = (carro) => {
-    dispatch(deleteCarro(carro)); 
+  const handleExportClick = async () => {
+    try {
+      const allCars = await carroService.getAll(total);
+      const dataToExport = allCars.map((carro: Carro) => ({
+        modelo: carro.modelo,
+        ano: carro.ano,
+        cor: carro.cor,
+        cavalosDePotencia: carro.cavalosDePotencia,
+        fabricante: carro.fabricante,
+        pais: carro.pais,
+      }));
+  
+      const csvContent = [
+        ['Modelo', 'Ano', 'Cor', 'Cavalos de Potência', 'Fabricante', 'País'],
+        ...dataToExport.map(carro => [
+          carro.modelo,
+          carro.ano,
+          carro.cor,
+          carro.cavalosDePotencia,
+          carro.fabricante,
+          carro.pais,
+        ]),
+      ]
+        .map(row => row.join(','))
+        .join('\n');
+  
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'carros.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Erro ao exportar os carros:', error);
+    }
   };
 
   useEffect(() => {
-    dispatch(getAllPaginated(0, limit)); 
+    if (!carros.length) {
+      dispatch(getAllPaginated(0, limit));
+    }
   }, [dispatch, limit]);
-
 
   return (
     <Card>
-      <CardHeader title="Carros" />
+      <div className="flex justify-between items-center pl-2.5 pr-2.5">
+        <CardHeader title="Carros" />
+
+        <Tooltip title="Exportar arquivo CSV" arrow>
+          <IconButton
+            onClick={handleExportClick}
+            sx={{
+              '&:hover': { backgroundColor: theme.palette.primary.light },
+              color: theme.palette.primary.main
+            }}
+            size="small"
+          >
+            <ImportExportIcon fontSize="small" />
+          </IconButton>
+        </Tooltip>
+      </div>
       <Divider />
       <TableContainer>
         <Table>

@@ -34,6 +34,21 @@ class CarroService {
     });
   }
 
+  getAll(limit: number) {
+    return axiosInstance.get("http://localhost:8080" + this.serverPath, {
+      headers: {
+        page: 0,
+        size: limit,
+      },
+    })
+    .then((response) => {
+      return response.data.content;      ;
+    })
+    .catch((error) => {
+      console.error("Erro ao carregar os dados", error);
+    });
+  }
+
   delete(id){
     return axiosInstance.delete("http://localhost:8080" + this.serverPath + "/" + id)
   }

@@ -3,7 +3,7 @@ export interface Carro {
   modelo: string;
   ano: string;
   cor: string;
-  cavalos_de_potencia: string;
+  cavalosDePotencia: string;
   fabricante:string;
   pais: string;
 }
